@@ -1,0 +1,9 @@
+#!/bin/bash
+# prerm
+
+set -e
+
+# Any cleanup before removal
+# Optional: could warn user if machine is still in domain
+
+exit 0

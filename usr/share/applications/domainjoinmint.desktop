@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Domain Join Mint
+Name[es]=Unirse a Dominio
+Comment=Join your Linux Mint machine to Active Directory
+Comment[es]=Una tu equipo Linux Mint a Active Directory
+Exec=/usr/bin/domainjoinmint
+Icon=domainjoinmint
+Terminal=false
+Type=Application
+Categories=System;Settings;
+StartupNotify=true
+StartupWMClass=DomainJoinMint
+Keywords=domain;active;directory;ad;join;realm;
+Keywords[es]=dominio;activo;directorio;unir;realm;
+

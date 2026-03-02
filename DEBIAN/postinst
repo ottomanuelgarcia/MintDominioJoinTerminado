@@ -1,0 +1,38 @@
+#!/bin/bash
+# postinst
+
+set -e
+
+case "$1" in
+    configure)
+        # Set permissions
+        chmod +x /usr/bin/domainjoinmint
+        chmod +x /usr/share/domainjoinmint/main.py
+
+        # Create log file
+        touch /var/log/domainjoinmint.log
+        chmod 666 /var/log/domainjoinmint.log
+
+        # Update caches
+        if command -v gtk-update-icon-cache >/dev/null 2>&1; then
+            gtk-update-icon-cache -f -t /usr/share/icons/hicolor || true
+        fi
+        
+        if command -v update-desktop-database >/dev/null 2>&1; then
+            update-desktop-database /usr/share/applications || true
+        fi
+        
+        if command -v glib-compile-schemas >/dev/null 2>&1; then
+            glib-compile-schemas /usr/share/glib-2.0/schemas/ || true
+        fi
+    ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+exit 0
+

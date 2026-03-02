@@ -1,0 +1,73 @@
+# DomainJoinMint Translation Template
+# Copyright (C) 2024
+# This file is distributed under the same license as the DomainJoinMint package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DomainJoinMint 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-02 15:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Domain Join Mint"
+msgstr ""
+
+msgid "Domain"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Grant Sudo access to Domain Admins"
+msgstr ""
+
+msgid "Join Domain"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Developed by: Otto Manuel Garcia Preval"
+msgstr ""
+
+msgid "Scanning for domains..."
+msgstr ""
+
+msgid "No domains found."
+msgstr ""
+
+msgid "Starting join process..."
+msgstr ""
+
+msgid "Verifying dependencies..."
+msgstr ""
+
+msgid "Joining domain..."
+msgstr ""
+
+msgid "Success! Reboot recommended."
+msgstr ""
+
+msgid "Failed to join domain"
+msgstr ""
+
+msgid "Success"
+msgstr ""
+
+msgid "System successfully joined to the domain. Please restart."
+msgstr ""
+
+msgid "Please enter all required fields"
+msgstr ""

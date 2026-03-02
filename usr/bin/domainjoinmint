@@ -1,0 +1,4 @@
+#!/bin/bash
+# /usr/bin/domainjoinmint
+
+python3 /usr/share/domainjoinmint/main.py "$@"

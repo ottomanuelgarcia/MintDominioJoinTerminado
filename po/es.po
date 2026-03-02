@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DomainJoinMint 1.0\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Domain Join Mint"
+msgstr "Unirse a Dominio"
+
+msgid "Domain"
+msgstr "Dominio"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "Username"
+msgstr "Usuario"
+
+msgid "Password"
+msgstr "Contraseña"
+
+msgid "Grant Sudo access to Domain Admins"
+msgstr "Otorgar permisos de Sudo a los Administradores del Dominio"
+
+msgid "Join Domain"
+msgstr "Unirse al Dominio"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Developed by: Otto Manuel Garcia Preval"
+msgstr "Desarrollado por: Otto Manuel Garcia Preval"
+
+msgid "Scanning for domains..."
+msgstr "Escaneando dominios..."
+
+msgid "No domains found."
+msgstr "No se encontraron dominios."
+
+msgid "Starting join process..."
+msgstr "Iniciando proceso de unión..."
+
+msgid "Verifying dependencies..."
+msgstr "Verificando dependencias..."
+
+msgid "Joining domain..."
+msgstr "Uniéndose al dominio..."
+
+msgid "Success! Reboot recommended."
+msgstr "¡Éxito! Se recomienda reiniciar."
+
+msgid "Failed to join domain"
+msgstr "Error al unirse al dominio"
+
+msgid "Success"
+msgstr "Éxito"
+
+msgid "System successfully joined to the domain. Please restart."
+msgstr "El sistema se unió correctamente al dominio. Por favor reinicie."
+
+msgid "Please enter all required fields"
+msgstr "Por favor complete todos los campos requeridos"
