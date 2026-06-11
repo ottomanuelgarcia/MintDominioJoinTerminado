@@ -10,6 +10,8 @@ import threading
 import configparser
 import gi
 
+from domain_discovery import discover_domains, build_discovery_message
+
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GdkPixbuf, GLib, Gio
 
@@ -144,8 +146,8 @@ class DomainJoinApp(Gtk.Application):
 
     def _log_idle(self, text):
         buffer = self.log_view.get_buffer()
-        iter = buffer.get_end_iter()
-        buffer.insert(iter, f"> {text}\n")
+        end_iter = buffer.get_end_iter()
+        buffer.insert(end_iter, f"> {text}\n")
         mark = buffer.create_mark(None, buffer.get_end_iter(), False)
         self.log_view.scroll_to_mark(mark, 0.0, False, 0.0, 0.0)
 
@@ -155,8 +157,14 @@ class DomainJoinApp(Gtk.Application):
 
     def _do_search(self):
         try:
-            res = subprocess.run(['realm', 'discover'], capture_output=True, text=True)
-            self.log(res.stdout if res.stdout else _("No domains found."))
+            domains, message = discover_domains()
+            if domains:
+                self.log(message)
+                self.entry_domain.set_text(domains[0])
+                if len(domains) > 1:
+                    self.log("Candidates: " + ", ".join(domains))
+            else:
+                self.log(message or _("No domains found."))
         except Exception as e:
             self.log(str(e))
 
@@ -175,6 +183,10 @@ class DomainJoinApp(Gtk.Application):
 
     def _do_join(self, domain, user, password):
         try:
+            # Validate domain input
+            if not self._is_valid_domain(domain):
+                raise ValueError(_("Invalid domain name format"))
+
             # Install
             self.log(_("Verifying dependencies..."))
             pkgs = ["realmd", "sssd", "sssd-tools", "libnss-sss", "libpam-sss", "adcli", "samba-common-bin", "krb5-user", "packagekit"]
@@ -194,8 +206,12 @@ class DomainJoinApp(Gtk.Application):
 
             # Sudoers
             if self.check_sudo.get_active():
-                sudo_rule = f'%Domain\ Admins@ {domain} ALL=(ALL) ALL'
-                subprocess.run(['pkexec', 'sh', '-c', f'echo \'{sudo_rule}\' > /etc/sudoers.d/domain_admins'], check=True)
+                sudo_rule = f'%Domain\\ Admins@{domain} ALL=(ALL) ALL\n'
+                process = subprocess.Popen(['pkexec', 'tee', '/etc/sudoers.d/domain_admins'],
+                                         stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                stdout, stderr = process.communicate(input=sudo_rule)
+                if process.returncode != 0:
+                    raise Exception(f"Failed to configure sudoers: {stderr}")
 
             self.log(_("Success! Reboot recommended."))
             GLib.idle_add(self._show_success)
@@ -203,6 +219,13 @@ class DomainJoinApp(Gtk.Application):
             self.log(f"{_('Failed to join domain')}: {e}")
         finally:
             GLib.idle_add(self.spinner.stop)
+
+    def _is_valid_domain(self, domain):
+        """Validate domain name format (basic check)"""
+        import re
+        # Allow valid domain name characters
+        pattern = r'^[a-zA-Z0-9][a-zA-Z0-9\-\.]*[a-zA-Z0-9]$'
+        return re.match(pattern, domain) is not None
 
     def _show_success(self):
         dialog = Gtk.MessageDialog(
